@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './noticia.css',
 })
 export class Noticia {
-
+  active = 1;
 }
