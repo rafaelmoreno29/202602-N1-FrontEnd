@@ -1,0 +1,10 @@
+<input type="number" class="form-control" [(ngModel)]="valor1" placeholder="Valor 1" />
+<input type="number" class="form-control" [(ngModel)]="valor2" placeholder="Valor 2" />
+<select class="form-control" [(ngModel)]="operacao">
+    <option value="+">+</option>
+    <option value="-">-</option>
+    <option value="*">*</option>
+    <option value="/">/</option>
+</select>
+<button class="btn btn-primary" (click)="calcular()">Calcular</button>
+<input type="number" class="form-control" [value]="resultado" readonly />
