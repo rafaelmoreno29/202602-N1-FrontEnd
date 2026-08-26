@@ -12,7 +12,142 @@ Na Aula 2 foram criados os componentes `Noticia` (grid de cards, imagem responsi
 
 ---
 
-## 2. Roteamento com Angular Router
+## 2. Data Binding
+
+**Data Binding** é o mecanismo do Angular que conecta a **classe TypeScript** (lógica) ao **template HTML** (view). Qualquer alteração em um lado pode ser refletida automaticamente no outro, dependendo do tipo de binding utilizado.
+
+O Angular possui **quatro tipos** de data binding:
+
+```
+Classe TypeScript  ──→  Template HTML    →  Interpolação   {{ }}
+Classe TypeScript  ──→  Template HTML    →  Property Binding  [ ]
+Template HTML      ──→  Classe TypeScript →  Event Binding    ( )
+Classe TypeScript ←──→  Template HTML    →  Two-way Binding  [( )]
+```
+
+---
+
+### 2.1 Interpolação — `{{ expressão }}`
+
+**Direção:** Classe → Template (unidirecional)
+
+Exibe o valor de uma propriedade ou expressão TypeScript diretamente no HTML. O Angular avalia a expressão e converte o resultado em texto.
+
+```typescript
+// cliente.ts
+meuNome: string = 'Rafael';
+vezesClicou: number = 0;
+```
+
+```html
+<!-- cliente.html -->
+<p>Meu nome é {{ meuNome }}</p>
+<p>Clicou {{ vezesClicou }} vezes</p>
+```
+
+- A interpolação é **somente leitura**: exibe dados da classe no template, mas alterações no HTML não afetam a classe.
+- Pode conter expressões simples: `{{ 2 + 2 }}`, `{{ nome.toUpperCase() }}`.
+
+---
+
+### 2.2 Property Binding — `[propriedade]="expressão"`
+
+**Direção:** Classe → Template (unidirecional)
+
+Define o valor de uma **propriedade de um elemento HTML ou diretiva** a partir de uma expressão TypeScript. Usa colchetes `[ ]`.
+
+```typescript
+// calculadora.ts
+resultado: number = 42;
+```
+
+```html
+<!-- calculadora.html -->
+<input type="number" [value]="resultado" readonly />
+```
+
+A diferença em relação à interpolação é que o property binding:
+- Funciona com **propriedades do DOM** (não atributos HTML), como `disabled`, `hidden`, `checked`, `src`.
+- Aceita **qualquer tipo** de valor (número, booleano, objeto), não apenas texto.
+
+```html
+<!-- outros exemplos de property binding -->
+<button [disabled]="vezesClicou === 0">-1</button>
+<img [src]="urlDaImagem" />
+```
+
+---
+
+### 2.3 Event Binding — `(evento)="handler($event)"`
+
+**Direção:** Template → Classe (unidirecional)
+
+Escuta um **evento do DOM** (clique, digitação, foco, etc.) e executa um método da classe quando ele ocorre. Usa parênteses `( )`.
+
+```typescript
+// cliente.ts
+clicar(n: number) {
+  this.vezesClicou = this.vezesClicou + n;
+}
+```
+
+```html
+<!-- cliente.html -->
+<button (click)="clicar(1)">+1</button>
+<button (click)="clicar(-1)">-1</button>
+```
+
+- O argumento `$event` é opcional e contém o objeto do evento nativo do navegador.
+- Qualquer evento do DOM pode ser usado: `(input)`, `(change)`, `(keyup)`, `(submit)`, `(mouseover)`, etc.
+
+```html
+<!-- exemplo com $event -->
+<input (input)="meuNome = $event.target.value" />
+```
+
+---
+
+### 2.4 Two-way Binding — `[(ngModel)]="propriedade"`
+
+**Direção:** Classe ↔ Template (bidirecional)
+
+Combina property binding e event binding em uma única sintaxe — a chamada **"banana in a box"** `[( )]`. Qualquer alteração no input atualiza a propriedade da classe, e qualquer alteração na propriedade atualiza o input.
+
+```typescript
+// cliente.ts
+meuNome: string = 'Rafael';
+```
+
+```html
+<!-- cliente.html -->
+<input type="text" [(ngModel)]="meuNome" />
+<p>{{ meuNome }}</p>  <!-- atualiza em tempo real conforme o usuário digita -->
+```
+
+A sintaxe `[(ngModel)]` é equivalente a:
+
+```html
+<!-- forma expandida — two-way binding "manual" -->
+<input [value]="meuNome" (input)="meuNome = $event.target.value" />
+```
+
+> **Atenção:** `ngModel` requer que o `FormsModule` esteja importado no `AppModule`.
+
+---
+
+### 2.5 Comparativo dos tipos de Data Binding
+
+| Tipo              | Sintaxe              | Direção               | Caso de uso típico                          |
+|-------------------|----------------------|-----------------------|---------------------------------------------|
+| Interpolação      | `{{ valor }}`        | Classe → Template     | Exibir texto, números, expressões simples   |
+| Property Binding  | `[propriedade]`      | Classe → Template     | Definir atributos dinâmicos (src, disabled) |
+| Event Binding     | `(evento)`           | Template → Classe     | Reagir a cliques, inputs, teclado           |
+| Two-way Binding   | `[(ngModel)]`        | Classe ↔ Template     | Formulários — sincronizar input com dado    |
+
+---
+
+## 3. Roteamento com Angular Router
+
 
 O principal tema desta aula foi a configuração do **sistema de rotas** do Angular, substituindo a navegação estática por URLs dinâmicas gerenciadas pelo `RouterModule`.
 
@@ -59,7 +194,7 @@ const routes: Routes = [
 
 ---
 
-## 3. Atualização do Layout Principal
+## 4. Atualização do Layout Principal
 
 ### 3.1 `app.html` — simplificado para roteamento
 
@@ -88,7 +223,7 @@ Os links do menu foram convertidos de `href` para `routerLink` com destaque da r
 
 ---
 
-## 4. Novos Componentes
+## 5. Novos Componentes
 
 ### 4.1 Componente `Home`
 
@@ -265,7 +400,7 @@ Página exibida quando a URL não corresponde a nenhuma rota cadastrada. Utiliza
 
 ---
 
-## 5. Atualização do `AppModule`
+## 6. Atualização do `AppModule`
 
 Todos os novos componentes foram declarados e o `FormsModule` foi adicionado para suporte ao `ngModel`:
 
@@ -289,7 +424,7 @@ export class AppModule { }
 
 ---
 
-## 6. Estrutura Final do Projeto
+## 7. Estrutura Final do Projeto
 
 ```
 AppModule
@@ -306,7 +441,7 @@ AppModule
 
 ---
 
-## 7. Conceitos Abordados
+## 8. Conceitos Abordados
 
 | Conceito                          | Descrição                                                                     |
 |-----------------------------------|-------------------------------------------------------------------------------|
