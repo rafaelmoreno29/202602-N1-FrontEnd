@@ -13,6 +13,9 @@ import { NaoEncontrado } from './nao-encontrado/nao-encontrado';
 import { FormsModule } from '@angular/forms';
 import { Calculadora } from './calculadora/calculadora';
 import { ClienteDetalhe } from './cliente-detalhe/cliente-detalhe';
+import { FormPai } from './form-pai/form-pai';
+import { FormReact } from './form-react/form-react';
+import { FormDriven } from './form-driven/form-driven';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { ClienteDetalhe } from './cliente-detalhe/cliente-detalhe';
     Cliente,
     NaoEncontrado,
     Calculadora,
-    ClienteDetalhe
+    ClienteDetalhe,
+    FormPai,
+    FormReact,
+    FormDriven
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,20 @@
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <div class="mb-3">
+        <label for="nome" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="nome" name="nome" [(ngModel)]="nome" required>
+        @if(form.submitted && form.controls['nome']?.invalid) {
+        <div class="text-danger">O campo nome é obrigatório.</div>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" required email>
+        @if(form.submitted && form.controls['email']?.errors?.['required']) {
+        <div class="text-danger">O campo email é obrigatório.</div>
+        }
+        @if(form.submitted && form.controls['email']?.errors?.['email']) {
+        <div class="text-danger">O campo email deve ser válido.</div>
+        }
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
