@@ -10,7 +10,7 @@ import { Noticia } from './noticia/noticia';
 import { Home } from './home/home';
 import { Cliente } from './cliente/cliente';
 import { NaoEncontrado } from './nao-encontrado/nao-encontrado';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Calculadora } from './calculadora/calculadora';
 import { ClienteDetalhe } from './cliente-detalhe/cliente-detalhe';
 import { FormPai } from './form-pai/form-pai';
@@ -39,7 +39,8 @@ import { FormDriven } from './form-driven/form-driven';
     NgbCarousel, NgbSlide,
     NgbNavContent, NgbNav, NgbNavItem, NgbNavItemRole, NgbNavLinkButton,
     NgbNavLinkBase, NgbNavOutlet,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners()
