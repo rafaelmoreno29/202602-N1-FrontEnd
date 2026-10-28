@@ -1,8 +1,12 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const usuarioRoutes = require('./routes/usuarioRoutes');
 
 const app = express();
 app.use(express.json());
+
+require('dotenv').config();
+const conexao = process.env.MONGODB_URI;
 
 //Configuração das rotas
 app.use('/usuarios', usuarioRoutes);
@@ -30,6 +34,11 @@ app.post('/somar', (req, res) => {
     res.json({ resultado });
 });
 
-app.listen(3000, () => {
-    console.log('Servidor rodando na porta 3000');
+mongoose.connect(conexao).then(() => {
+    app.listen(3000, () => {
+        console.log('Servidor rodando na porta 3000');
+        console.log('Conexão com o MongoDB estabelecida com sucesso!');
+    });
+}).catch((error) => {
+    console.error('Erro ao conectar ao MongoDB:', error);
 });
