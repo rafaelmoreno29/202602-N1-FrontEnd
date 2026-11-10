@@ -16,6 +16,8 @@ import { ClienteDetalhe } from './cliente-detalhe/cliente-detalhe';
 import { FormPai } from './form-pai/form-pai';
 import { FormReact } from './form-react/form-react';
 import { FormDriven } from './form-driven/form-driven';
+import { ClienteApi } from './cliente-api/cliente-api';
+import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { FormDriven } from './form-driven/form-driven';
     ClienteDetalhe,
     FormPai,
     FormReact,
-    FormDriven
+    FormDriven,
+    ClienteApi
   ],
   imports: [
     BrowserModule,
@@ -40,10 +43,12 @@ import { FormDriven } from './form-driven/form-driven';
     NgbNavContent, NgbNav, NgbNavItem, NgbNavItemRole, NgbNavLinkButton,
     NgbNavLinkBase, NgbNavOutlet,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
   ],
   providers: [
-    provideBrowserGlobalErrorListeners()
+    provideBrowserGlobalErrorListeners(),
+    provideHttpClient()
   ],
   bootstrap: [App]
 })

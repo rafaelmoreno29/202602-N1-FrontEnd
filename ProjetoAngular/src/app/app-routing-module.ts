@@ -8,11 +8,12 @@ import { ClienteDetalhe } from './cliente-detalhe/cliente-detalhe';
 import { FormPai } from './form-pai/form-pai';
 import { FormReact } from './form-react/form-react';
 import { FormDriven } from './form-driven/form-driven';
+import { ClienteApi } from './cliente-api/cliente-api';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: Home },
-  { path: 'cliente', component: Cliente },
+  { path: 'cliente', component: ClienteApi },
   { path: 'calculadora', component: Calculadora },
   { path: 'calculadora/:v1/:v2', component: Calculadora },
   { path: 'cliente-detalhe/:cod', component: ClienteDetalhe },
