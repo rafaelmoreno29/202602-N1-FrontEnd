@@ -17,4 +17,7 @@ export class ClienteService {
   excluirCliente(id: number) {
     return this.http.delete(environment.apiUrl + 'cliente/' + id);
   }
+  inserirCliente(cliente: any) {
+    return this.http.post(environment.apiUrl + 'cliente', cliente);
+  }
 }
